@@ -2,7 +2,7 @@
 <html>
 
     <head>
-        <title>ウェブ世界時計</title>
+        <title>世界時計</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
         <style>
@@ -26,93 +26,10 @@
 
     <body>
         <div class="container">
-            <h1>ウェブ世界時計</h1>
+            <h1>世界時計</h1>
             <div id="map"></div>
-            <script>
-                // 地図を作成
-                var map = L.map('map', {
-                    center: [35.4122, 139.4130], // 中心座標の指定
-                    zoom: 2, // ズームレベルの指定
-                    zoomControl: false, // ボタンによる拡大縮小機能を無効化
-                    scrollWheelZoom: false, // マウスホイールによる拡大縮小機能を無効化
-                    touchZoom: false, // ピンチアウトによる拡大縮小機能を無効化
-                });
-
-                // タイルレイヤーを追加
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; OpenStreetMap contributors',
-                    maxZoom: 18,
-                }).addTo(map);
-
-
-                // 地図の表示範囲を指定（ロンドンからニューヨークの間）
-                map.setMaxBounds([[51.3026, 0.0739], [40.6643, 286.0615]]);
-
-
-                // プロットの表示
-                // 座標の配列を用意
-                var markers = [
-                    [35.4122, 139.4130], // 東京
-                    [28.3650, 77.1230], // ニューデリー
-                    [51.3026, 0.0739], // ロンドン
-                    [40.6643, 286.0615], // ニューヨーク
-                ];
-
-                // 表示する国名
-                var country = [
-                    "tokyo",
-                    "new delhi",
-                    "london",
-                    "new york",
-                ];
-
-
-                // 時刻の表示
-                // 日本の現在時刻を取得する
-                var japanTime = new Date().toLocaleTimeString("ja-JP", { timeZone: "Asia/Tokyo", hour12: false, hour: '2-digit', minute: '2-digit', seconds: false });
-                // ニューデリーの現在時刻を取得する
-                var newDelhiTime = new Date().toLocaleTimeString("ja-JP", { timeZone: "Asia/Kolkata", hour12: false, hour: '2-digit', minute: '2-digit', seconds: false });
-                // ロンドンの現在時刻を取得する
-                var ukTime = new Date().toLocaleTimeString("ja-JP", { timeZone: "Europe/London", hour12: false, hour: '2-digit', minute: '2-digit', seconds: false });
-                // ニューヨークの現在時刻を取得する
-                var nyTime = new Date().toLocaleTimeString("ja-JP", { timeZone: "America/New_York", hour12: false, hour: '2-digit', minute: '2-digit', seconds: false });
-
-                // 取得した時刻を格納する
-                var times = [];
-                times.push(japanTime);
-                times.push(newDelhiTime);
-                times.push(ukTime);
-                times.push(nyTime);
-
-
-
-                // 各地点にプロットを追加
-                for (var i = 0; i < markers.length; i++) {
-                    // マーカーを作成
-                    var marker = L.marker(markers[i]).addTo(map);
-
-                    // ラベルを作成
-                    // ニューヨークの場合はラベルを上に表示する
-                    if (i === 3) {
-                        marker.bindTooltip(`<div>${country[i].toUpperCase()}</div><div>${times[i]}</div>`, {
-                            permanent: true, // ラベルを常時表示
-                            direction: 'top', // ラベルの表示位置を設定
-                            offset: [0, -10], // ラベルの位置を微調整
-                            className: 'custom-marker' // ラベルのスタイルを設定するCSSクラス名
-                        });
-                    } else {
-                        marker.bindTooltip(`<div>${country[i].toUpperCase()}</div><div>${times[i]}</div>`, {
-                            permanent: true, // ラベルを常時表示
-                            direction: 'right', // ラベルの表示位置を設定
-                            offset: [0, 10], // ラベルの位置を微調整
-                            className: 'custom-marker' // ラベルのスタイルを設定するCSSクラス名
-                        });
-                    }
-                }
-
-            </script>
+            <script src="main.js"></script>
         </div>
-
     </body>
 
 </html>
